@@ -6,6 +6,7 @@ const { Schema } = mongoose;
 const reductionModel = new Schema({
   codeName: String,
   isActive: Boolean,
+  deleted: Boolean,
   users: [String],
   source: {
     center: {
@@ -50,6 +51,7 @@ reductionModel.index({
 reductionModel.index({
   dateRange: 1
 });
-reductionModel.plugin(mongoosePaginate)
+reductionModel.plugin(mongoosePaginate);
+const Reduction = mongoose.model('Reduction', reductionModel);
 
-module.exports =  mongoose.model('Reduction', reductionModel);
+module.exports = { Reduction, reductionModel };

@@ -5,8 +5,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const db = mongoose.connect('mongodb://localhost/ReductionsApp');
-
+mongoose.connect('mongodb://localhost/ReductionsApp')
+  .then(() => debug('Connected Successfully to mongodb'));
 
 const app = express();
 
@@ -16,9 +16,15 @@ app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const reductionRouter = require('./services/router');
+const reductionRouter = require('./services/reductionRouter');
+const inflationRouter = require('./services/inflationRouter');
+const deflationRouter = require('./services/deflationRouter');
 
-app.use('/api',reductionRouter);
+
+app.use('/api/reductions', reductionRouter);
+app.use('/api/deflations', deflationRouter);
+app.use('/api/inflations', inflationRouter);
+
 
 app.get('/', (req, res) => {
   res.json({ hello: 'world' });
