@@ -8,41 +8,25 @@ const reductionModel = new Schema({
   isActive: Boolean,
   deleted: Boolean,
   users: [String],
-  source: {
-    center: {
-      longitude: Number,
-      latitude: Number
-    },
-    rayon: Number
-  },
-  destination: {
-    center: {
-      longitude: Number,
-      latitude: Number
-    },
-    rayon: Number
-  },
-  dateRange: [{
-    startDate: Date,
-    endDate: Date
-  }],
-  timeRange: [{
-    startHour: Number,
-    endHour: Number
-  }],
+  source: { center: { longitude: Number, latitude: Number }, rayon: Number },
+  destination: { center: { longitude: Number, latitude: Number }, rayon: Number },
+  startDate: Date,
+  endDate: Date,
   weekDays: [String],
-  maxPersonUsage: Number,
   flatAmount: Number,
   percentage: Number,
-  minPriceValue: Number,
-  maxReducationValue: Number
-
+  maxPercentAmount: Number,
+  minPrice: Number,
+  maxPrice: Number,
+  maxUsage: Number,
+  maxPersonUsage: Number,
+  usage: Number,
 }, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
+    timestamps: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
+    }
+  });
 
 
 reductionModel.index({
