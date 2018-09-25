@@ -19,7 +19,10 @@ const pointSchema = new mongoose.Schema({
 const reductionModel = new Schema({
   codeName: String,
   isActive: Boolean,
-  isDeleted: Boolean,
+  isDeleted: {
+    type: Boolean,
+    default: false
+  },
   users: [String],
   departure: { center: pointSchema , radius: Number, address: String },
   destination: { center: pointSchema, radius: Number, address: String },

@@ -4,6 +4,7 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 mongoose.connect('mongodb://localhost/ReductionsApp')
   .then(() => debug('Connected Successfully to mongodb'));
@@ -13,6 +14,7 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 app.use(morgan('tiny'));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
