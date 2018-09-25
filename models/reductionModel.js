@@ -21,7 +21,7 @@ const reductionModel = new Schema({
   isActive: Boolean,
   isDeleted: Boolean,
   users: [String],
-  source: { center: pointSchema , radius: Number, address: String },
+  departure: { center: pointSchema , radius: Number, address: String },
   destination: { center: pointSchema, radius: Number, address: String },
   startDate: Date,
   endDate: Date,
