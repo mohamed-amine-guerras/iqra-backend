@@ -33,7 +33,6 @@ const reductionModel = new Schema({
   maxPrice: Number,
   maxUsage: Number,
   maxPersonUsage: Number,
-  usage: Number,
 }, {
     timestamps: {
       createdAt: 'created_at',
