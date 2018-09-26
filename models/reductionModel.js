@@ -4,14 +4,13 @@ const mongoosePaginate = require('mongoose-paginate');
 const { Schema } = mongoose;
 
 
-const pointSchema = new mongoose.Schema({
+const polygonSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ['Point']
+    enum: ['Polygon']
   },
   coordinates: {
-    type: [Number],
-    index:'2dsphere'
+    type: [[[Number]]], // Array of arrays of arrays of numbers
   }
 });
 
@@ -24,8 +23,8 @@ const reductionModel = new Schema({
     default: false
   },
   users: [String],
-  departure: { center: pointSchema , radius: Number, address: String },
-  destination: { center: pointSchema, radius: Number, address: String },
+  departure: polygonSchema,
+  destination: polygonSchema,
   startDate: Date,
   endDate: Date,
   weekDays: [String],
