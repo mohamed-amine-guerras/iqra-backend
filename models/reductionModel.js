@@ -17,7 +17,10 @@ const polygonSchema = new mongoose.Schema({
 
 const reductionModel = new Schema({
   codeName: String,
-  isActive: Boolean,
+  isActive: {
+    type:Boolean,
+    default:true
+  },
   isDeleted: {
     type: Boolean,
     default: false
