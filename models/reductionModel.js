@@ -26,8 +26,14 @@ const reductionModel = new Schema({
     default: false
   },
   users: [String],
-  departure: polygonSchema,
-  destination: polygonSchema,
+  departure: {
+    address: String,
+    location: polygonSchema
+  },
+  destination: {
+    address: String,
+    location: polygonSchema
+  },
   startDate: Date,
   endDate: Date,
   weekDays: [String],
