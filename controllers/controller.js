@@ -10,8 +10,10 @@ function Controller(Model) {
 
   function create(req, res) {
     const model = new Model(req.body);
-    model.save();
-    res.status(201).send(model);
+    model.save()
+      .then(()=> res.status(201).send(model))
+      .catch(error => res.status(500).send(error));
+    
   }
   function getOne(req, res) {
     Model.findById(req.params.id)

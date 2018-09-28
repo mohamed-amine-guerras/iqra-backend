@@ -14,9 +14,13 @@ const polygonSchema = new mongoose.Schema({
   }
 });
 
+const positiveNumberValidator = (number) => {return number >= 0};
 
 const reductionModel = new Schema({
-  codeName: String,
+  codeName: {
+    type: String,
+    required: [true, 'Codename required']
+  },
   isActive: {
     type:Boolean,
     default:true
@@ -35,15 +39,61 @@ const reductionModel = new Schema({
     location: polygonSchema
   },
   startDate: Date,
-  endDate: Date,
-  weekDays: [String],
-  flatAmount: Number,
-  percentage: Number,
-  maxPercentAmount: Number,
-  minPrice: Number,
-  maxPrice: Number,
-  maxUsage: Number,
-  maxPersonUsage: Number,
+  endDate: {
+    type: Date,
+    validate: {
+      validator: function(end) {
+        return this.startDate ? end >= this.startDate : true;
+      }
+    }
+  },
+  weekDays: {
+    type: [String],
+    enum:['Sunday', 'Monday', 'Tuesday', 
+    'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  },
+  flatAmount: {
+    type: Number,
+    validate:{
+      validator: positiveNumberValidator
+    }
+  },
+  percentage: {
+    type: Number,
+    validate: {
+      validator: positiveNumberValidator
+    }
+  },
+  maxPercentAmount: {
+    type: Number,
+    validate: {
+      validator: positiveNumberValidator
+    }
+  },
+  minPrice: {
+    type: Number,
+    validate: {
+      validator: positiveNumberValidator
+    }
+  },
+  maxPrice: {
+    type: Number,
+    validate: {
+      validator: positiveNumberValidator
+    }
+  },
+  maxUsage: {
+    type: Number,
+    validate: {
+      validator: positiveNumberValidator
+    }
+  },
+  maxPersonUsage: {
+    type: Number,
+    validate: {
+      validator: positiveNumberValidator
+    }
+  },
 }, {
     timestamps: {
       createdAt: 'created_at',
@@ -53,10 +103,7 @@ const reductionModel = new Schema({
 
 
 reductionModel.index({
-  users: 1
-});
-reductionModel.index({
-  dateRange: 1
+  codeName: 1
 });
 reductionModel.plugin(mongoosePaginate);
 const Reduction = mongoose.model('Reduction', reductionModel);
