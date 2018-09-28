@@ -27,7 +27,7 @@ function Controller(Model) {
   }
 
   function deleteOne(req, res) {
-    Model.findByIdAndUpdate(req.params.id, { deleted: true }, { new: true })
+    Model.findByIdAndDelete(req.params.id)
       .then((model) => {
         res.json(model);
       })
