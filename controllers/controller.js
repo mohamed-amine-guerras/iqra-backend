@@ -21,11 +21,16 @@ function Controller(Model) {
       .catch(error => res.status(500).send(error));
   }
   function update(req, res) {
-    Model.findByIdAndUpdate(req.params.id, { ...req.body }, { new: true })
+    Model.findByIdAndUpdate(req.params.id, { ...req.body }, { new: true, runValidators: true })
       .then((model) => {
         res.json(model);
       })
-      .catch(error => res.status(500).send(error));
+      .catch(error => {
+        if (error.name === 'ValidationError') {
+          res.status(422).json(error);
+        }
+        else res.status(500).send(error);
+      });
   }
 
   function deleteOne(req, res) {

@@ -14,7 +14,12 @@ const polygonSchema = new mongoose.Schema({
   }
 });
 
-const positiveNumberValidator = (number) => {return number >= 0};
+
+function dateValidator (endDate)  {
+  if (this.startDate) return this.startDate <= endDate ;
+  return true;
+  
+}
 
 const reductionModel = new Schema({
   codeName: {
@@ -41,11 +46,7 @@ const reductionModel = new Schema({
   startDate: Date,
   endDate: {
     type: Date,
-    validate: {
-      validator: function(end) {
-        return this.startDate ? end >= this.startDate : true;
-      }
-    }
+    validate:  [dateValidator, 'End Date must be after Start Date']
   },
   weekDays: {
     type: [String],
@@ -54,45 +55,31 @@ const reductionModel = new Schema({
   },
   flatAmount: {
     type: Number,
-    validate:{
-      validator: positiveNumberValidator
-    }
+    min:0
   },
   percentage: {
     type: Number,
-    validate: {
-      validator: positiveNumberValidator
-    }
+    min: 0
   },
   maxPercentAmount: {
     type: Number,
-    validate: {
-      validator: positiveNumberValidator
-    }
+    min: 0
   },
   minPrice: {
     type: Number,
-    validate: {
-      validator: positiveNumberValidator
-    }
+    min: 0
   },
   maxPrice: {
     type: Number,
-    validate: {
-      validator: positiveNumberValidator
-    }
+    min: 0
   },
   maxUsage: {
     type: Number,
-    validate: {
-      validator: positiveNumberValidator
-    }
+    min: 0
   },
   maxPersonUsage: {
     type: Number,
-    validate: {
-      validator: positiveNumberValidator
-    }
+    min: 0
   },
 }, {
     timestamps: {
