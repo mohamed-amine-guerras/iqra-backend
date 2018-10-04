@@ -1,12 +1,12 @@
 const express = require('express');
-const chalk = require('chalk');
 const debug = require('debug')('app');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-mongoose.connect('mongodb://localhost/ReductionsApp')
+mongoose.Promise = require('bluebird');
+
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/ReductionsApp', { useMongoClient: true })
   .then(() => debug('Connected Successfully to mongodb'));
 
 const app = express();
@@ -15,8 +15,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(morgan('tiny'));
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 const reductionRouter = require('./services/reductionRouter');
 const inflationRouter = require('./services/inflationRouter');
