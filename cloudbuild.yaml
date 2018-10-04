@@ -1,0 +1,7 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["build","--no-cache=true",
+   "--build-arg", "BRANCH=$BRANCH_NAME",
+   "-t", "eu.gcr.io/swift-implement-155307/yassir-cost-influancer-be:v$SHORT_SHA", "."]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["push", "eu.gcr.io/swift-implement-155307/yassir-cost-influancer-be:v$SHORT_SHA"]
