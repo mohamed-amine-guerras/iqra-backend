@@ -1,12 +1,12 @@
 {
-  "name": "yassir-reduction-backend",
+  "name": "iqra-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start_dev": "set DEBUG=app,app:* & nodemon app.js",
-    "start": "node app.js",
+    "start": "set DEBUG=app,app:* & nodemon app.js",
+    "start_prod": "node app.js",
     "lint": "eslint app.js  "
   },
   "author": "",

@@ -6,7 +6,7 @@ const cors = require('cors');
 
 mongoose.Promise = require('bluebird');
 
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/ReductionsApp', { useMongoClient: true })
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/IqraApp', { useMongoClient: true })
   .then(() => debug('Connected Successfully to mongodb'));
 
 const app = express();
@@ -18,14 +18,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const reductionRouter = require('./services/reductionRouter');
-const inflationRouter = require('./services/inflationRouter');
-const deflationRouter = require('./services/deflationRouter');
+const teacherRouter = require('./services/teacherRouter');
+const studentRouter = require('./services/studentRouter');
 
 
-app.use('/api/reductions', reductionRouter);
-app.use('/api/deflations', deflationRouter);
-app.use('/api/inflations', inflationRouter);
+
+app.use('/api/teachers', teacherRouter);
+app.use('/api/students', studentRouter);
+
 
 
 app.get('/', (req, res) => {
@@ -33,5 +33,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  debug(`Listening on port ${chalk.green(port)}`);
+  debug(`Listening on port ${port}`);
 });

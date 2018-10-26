@@ -1,26 +1,27 @@
 const { Router } = require('express');
-const { Reduction } = require('../models/reductionModel');
+const { Student } = require('../models/studentSchema');
 const {
   getAll,
   create,
   getOne,
   update,
   deleteOne
-} = require('../controllers/controller')(Reduction);
+} = require('../controllers/controller')(Student);
+
 
 
 function router() {
-  const reductionRouter = Router();
-  reductionRouter.route('/')
+  const teacherRouter = Router();
+  teacherRouter.route('/')
     .get(getAll)
     .post(create);
 
-  reductionRouter.route('/:id')
+  teacherRouter.route('/:id')
     .get(getOne)
     .put(update)
     .delete(deleteOne);
 
-  return reductionRouter;
+  return teacherRouter;
 }
 
 module.exports = router();
