@@ -6,8 +6,11 @@ const cors = require('cors');
 
 mongoose.Promise = require('bluebird');
 
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/IqraApp', { useMongoClient: true })
-  .then(() => debug('Connected Successfully to mongodb'));
+mongoose.connect(process.env.MONGO_URL || 'mongodb://user:password2018@ds143143.mlab.com:43143/iqra', {
+  useMongoClient: true
+})
+  .then(() => debug('Connected Successfully to mongodb'))
+  .catch(error => debug(error));
 
 const app = express();
 
