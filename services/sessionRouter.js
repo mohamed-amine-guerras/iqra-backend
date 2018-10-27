@@ -1,27 +1,27 @@
 const { Router } = require("express");
-const { Teacher } = require("../models/teacherSchema");
+const { Session } = require("../models/sessionSchema");
 const {
   getAll,
   create,
   getOne,
   update,
   deleteOne
-} = require("../controllers/controller")(Teacher);
+} = require("../controllers/controller")(Session);
 
 function router() {
-  const teacherRouter = Router();
-  teacherRouter
+  const sessionRouter = Router();
+  sessionRouter
     .route("/")
     .get(getAll)
     .post(create);
 
-  teacherRouter
+  sessionRouter
     .route("/:id")
     .get(getOne)
     .put(update)
     .delete(deleteOne);
 
-  return teacherRouter;
+  return sessionRouter;
 }
 
 module.exports = router();
