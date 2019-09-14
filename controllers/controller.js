@@ -7,7 +7,7 @@ function Controller(Model) {
   }
   function getStats(req,res){
 
-    Model.countDocuments()
+    Model.count()
       .then(count => res.json({"elementsCount": count}))
       .catch(error => res.status(500).send(error));
 
