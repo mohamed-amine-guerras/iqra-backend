@@ -10,22 +10,6 @@ const teacherSchema = new Schema(
     },
     firstName: {
       type: String
-    },
-    isDeleted: {
-      type: Boolean,
-      default: false
-    },
-    email: {
-      type: String,
-      required: [true, "The email is required"],
-      unique: true
-    },
-    password: {
-      type: String,
-      required: [true, "The password is required"]
-    },
-    birthday: {
-      type: String
     }
   },
   {
