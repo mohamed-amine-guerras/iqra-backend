@@ -29,9 +29,7 @@ const teacherRouter = require("./services/teacherRouter");
 const studentRouter = require("./services/studentRouter");
 const sessionRouter = require("./services/sessionRouter");
 
-app.use("/api/teachers", teacherRouter);
-app.use("/api/students", studentRouter);
-app.use("/api/sessions", sessionRouter);
+app.use("/api", teacherRouter);
 
 app.get("/", (req, res) => {
   res.json({ hello: "world" });

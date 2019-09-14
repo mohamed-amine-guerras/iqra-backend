@@ -5,6 +5,12 @@ function Controller(Model) {
       .then(result => res.json(result))
       .catch(error => res.status(500).send(error));
   }
+  function getStats(req,res){
+
+    const count  = Model.count()
+    res.json({"elementsCount": count})
+
+  }
 
   function create(req, res) {
     const model = new Model(req.body);
@@ -47,6 +53,7 @@ function Controller(Model) {
     create,
     getOne,
     update,
+    getStats,
     deleteOne
   };
 }

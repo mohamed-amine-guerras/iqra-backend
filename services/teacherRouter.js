@@ -5,13 +5,14 @@ const {
   create,
   getOne,
   update,
+  getStats,
   deleteOne
 } = require("../controllers/controller")(Teacher);
 
 function router() {
   const teacherRouter = Router();
   teacherRouter
-    .route("/")
+    .route("/all")
     .get(getAll)
     .post(create);
 
@@ -20,6 +21,10 @@ function router() {
     .get(getOne)
     .put(update)
     .delete(deleteOne);
+
+  teacherRouter
+    .route("/stats")
+    .get(getStats)
 
   return teacherRouter;
 }
