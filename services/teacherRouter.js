@@ -17,14 +17,16 @@ function router() {
     .post(create);
 
   teacherRouter
+    .route("/stats")
+    .get(getStats)
+
+  teacherRouter
     .route("/:id")
     .get(getOne)
     .put(update)
     .delete(deleteOne);
 
-  teacherRouter
-    .route("/stats")
-    .get(getStats)
+ 
 
   return teacherRouter;
 }
