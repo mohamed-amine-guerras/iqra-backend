@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 function Controller(Model) {
   function getAll(req, res) {
     const { query } = req;
@@ -22,9 +24,9 @@ function Controller(Model) {
       .catch(error => res.status(500).send(error));
   }
   function getOne(req, res) {
-    Model.findOne(req.params.id)
+    Model.findOne(mongoose.Types.ObjectId(req.params.id))
       .then(model => res.json(model))
-      .catch(error => res.status(500).send(error));
+      .catch(error => res.status(404).send(error));
   }
   function update(req, res) {
     Model.findByIdAndUpdate(
